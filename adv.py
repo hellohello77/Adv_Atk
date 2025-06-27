@@ -3,13 +3,10 @@ import torch
 import torch.nn as nn
 from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 
-model = Qwen2VLForConditionalGeneration.from_pretrained('./tmp', local_files_only=True, torch_dtype="auto", device_map="auto").eval()
-processor = AutoProcessor.from_pretrained('./tmp', local_files_only=True, torch_dtype="auto", device_map="auto")
+model_name = "Qwen/Qwen2-VL-7B-Instruct"
 
-# processor = AutoProcessor.from_pretrained("Qwen/Qwen2-VL-7B-Instruct")
-
-# input_tgt = processor.tokenizer('dog', return_tensors='pt').input_ids[0]
-# print(input_tgt)
+model = Qwen2VLForConditionalGeneration.from_pretrained(model_name, torch_dtype="auto", device_map="auto").eval()
+processor = AutoProcessor.from_pretrained(model_name, torch_dtype="auto", device_map="auto")
 
 image = Image.open('biden_resized.png').convert("RGB")
 
